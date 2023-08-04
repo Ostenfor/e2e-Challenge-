@@ -1,6 +1,5 @@
 /// <reference types="cypress"/>
 
-
 describe('android devices list', () => {
   it('adds and compare mutiple devices', () => {
     cy.visit('https://androidenterprisepartners.withgoogle.com/devices/');
