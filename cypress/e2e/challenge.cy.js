@@ -6,6 +6,7 @@ describe('android devices list', () => {
     cy.get('.modal__item-button').click();
   
     cy.window().scrollTo('bottom');
+
     cy.get('[style=""] > .result-card > .result-card__primary > .result-card__compare-btn > .js-track-click > .md-container').click();
     //checking that each device was added to the list.
     cy.get('.cp-console__counter').contains('1/3');
@@ -21,7 +22,7 @@ describe('android devices list', () => {
     cy.get('.cp-console__counter').contains('3/3');
     cy.get('.cp-console__anchor').click();
 
-    
+
     cy.get('h1').contains('Comparing Devices');
 
     //checking that there are actually 3 devices. 
