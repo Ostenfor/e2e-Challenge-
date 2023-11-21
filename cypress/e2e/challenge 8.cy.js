@@ -31,6 +31,7 @@ describe('android devices list', () => {
     cy.get('h1').contains('Comparing Devices');
 
     //checking that there are actually 3 devices. 
+    cy.screenshot();
     cy.get('[ng-repeat="i in [].constructor(3) track by $index"][style=""]').contains('View Device').should('have.length',1);
     cy.get('.compare-preview > .compare-content__row-center > .compare-content__row > :nth-child(3)').contains('View Device').should('have.length',1);
     cy.get('.compare-preview > .compare-content__row-center > .compare-content__row > :nth-child(4)').contains('View Device').should('have.length',1);
