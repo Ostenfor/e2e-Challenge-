@@ -6,7 +6,7 @@
 
 
 describe('android devices list', () => {
-  it('adds and compare mutiple devices', () => {
+  it('should adds and compare mutiple devices', () => {
     cy.visit('https://androidenterprisepartners.withgoogle.com/devices/');
     cy.get('.modal__item-button').click();
   
