@@ -7,7 +7,7 @@
 describe('Amazon', () => {
     it('should change the currency settings', () => {
         cy.visit('https://amazon.com');
-        
+        cy.visit('https://amazon.com');
         cy.get('.icp-nav-link-inner > .nav-line-2') .trigger('mouseover');
         cy.wait(1)
         cy.get('#nav-flyout-icp > .nav-template > :nth-child(14) > .nav-text > .icp-flyout-change').contains('Change').click();
