@@ -1,21 +1,39 @@
 /// <reference types="cypress"/>
 
 //Exercise #5
-//Criteria: When a user navigates to a smartphone detail page on www.samsung.com website on a mobile device. The user should be able to select online exclusive colors and see a larger preview of the phone in that color.
+//Criteria: as a user that visits https://androidenterprisepartners.withgoogle.com/devices/ I'm able to compare devices i've selected. 
+//Write 1 or more automation test scenarios  that verifies a user can successfully compare devices.
 
 
-describe('Samsung', () => {
-    it('should be able to select online exclusive colors and see a larger preview of the phone in that color.', () => {
-        cy.visit('www.samsung.com');
-        cy.scrollTo('bottom')
-        cy.get(':nth-child(2) > .footer-category > .footer-category__list-wrap > .footer-category__list > :nth-child(1) > .footer-category__link').click()
-        cy.wait(2)
-        cy.url('https://www.samsung.com/latin/smartphones/?product1=sm-f916bznqgto&product2=&product3=sm-a525mzkgtpa')
-        cy.wait(2)
-        cy.get(':nth-child(1) > .nv14-visual-lnb__featured-item-link > .image > .image__main').click()
-        cy.wait(1)
-        cy.get('[data-productidx="0"] > .pd03-product-card > .pd03-product-card__item > .pd03-product-card__product-content > .pd03-product-card__product-content-primary > .pd03-product-card__option-selector > .option-selector-v2 > .option-selector-v2__wrap--color-chip > .option-selector-v2__swiper > .option-selector-v2__swiper-container > .option-selector-v2__swiper-wrapper > :nth-child(3) > .option-selector-v2__color > .option-selector-v2__color-code').click()
-        cy.wait(1)
-        cy.get('[data-productidx="0"] > .pd03-product-card > .pd03-product-card__item > .pd03-product-card__product-content > .pd03-product-card__product-content-primary > .pd03-product-card__option-selector > .option-selector-v2 > .option-selector-v2__color-name > .option-selector-v2__color-name-text > .option-selector-v2__color-name-text-in').contains('Graphite')
-    });   
-});
+describe('android devices list', () => {
+  it('should adds and compare mutiple devices', () => {
+    cy.visit('https://androidenterprisepartners.withgoogle.com/devices/');
+    cy.get('.modal__item-button').click();
+  
+    cy.window().scrollTo('bottom');
+
+    cy.get('[style=""] > .result-card > .result-card__primary > .result-card__compare-btn > .js-track-click > .md-container').click();
+    //checking that each device was added to the list.
+    cy.get('.cp-console__counter').contains('1/3');
+
+    cy.get(':nth-child(2) > .result-card > .result-card__primary > .result-card__compare-btn > .js-track-click > .md-container').click();
+    cy.window().scrollTo('center');
+    //checking that each device was added to the list.
+    cy.get('.cp-console__counter').contains('2/3');
+
+    cy.window().scrollTo('center');
+    cy.get(':nth-child(11) > .result-card > .result-card__primary > .result-card__compare-btn > .js-track-click > .md-container').click();
+    //checking that each device was added to the list.
+    cy.get('.cp-console__counter').contains('3/3');
+    cy.get('.cp-console__anchor').click();
+
+
+    cy.get('h1').contains('Comparing Devices');
+
+    //checking that there are actually 3 devices. 
+    cy.screenshot();
+    cy.get('[ng-repeat="i in [].constructor(3) track by $index"][style=""]').contains('View Device').should('have.length',1);
+    cy.get('.compare-preview > .compare-content__row-center > .compare-content__row > :nth-child(3)').contains('View Device').should('have.length',1);
+    cy.get('.compare-preview > .compare-content__row-center > .compare-content__row > :nth-child(4)').contains('View Device').should('have.length',1);
+  })
+})  

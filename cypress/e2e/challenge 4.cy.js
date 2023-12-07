@@ -1,36 +1,21 @@
 /// <reference types="cypress"/>
 
 //Exercise #4
-//Criteria: When a user visits https://www.sony.com/en/SonyInfo/design/stories/. the user should be able to switch between story categories and see the correct list of stories based on the selection.
+//Criteria: When a user navigates to a smartphone detail page on www.samsung.com website on a mobile device. The user should be able to select online exclusive colors and see a larger preview of the phone in that color.
 
-/// <reference types="cypress"/>
 
-describe('Sony', () => {
-    it('should be able to switch between story categories and see the correct list of stories based on the selection', () => {
-        // Avoid uncaught exceptions
-        Cypress.on('uncaught:exception', (err, runnable) => {
-            return false;
-        });
-
-        // Visit the webpage with the correct URL
-        cy.visit('https://www.sony.com/en/SonyInfo/design/stories/')
-        cy.viewport(1600, 800);
-
-        //we take the class of the heading li and find the children and move with eq to verify each one.
-        cy.get('.tag-list-heading').find('.tag-item a').eq(1).click()
-        cy.url().should('include', 'https://www.sony.com/en/SonyInfo/design/stories/#product')
-
-        cy.get('.tag-list-heading').find('.tag-item a').eq(2).click()
-        cy.url().should('include', 'https://www.sony.com/en/SonyInfo/design/stories/#ui-ux')
-
-        cy.get('.tag-list-heading').find('.tag-item a').eq(3).click()
-        cy.url().should('include', 'https://www.sony.com/en/SonyInfo/design/stories/#communication')
-
-        cy.get('.tag-list-heading').find('.tag-item a').eq(4).click()
-        cy.url().should('include', 'https://www.sony.com/en/SonyInfo/design/stories/#interviews')
-
-        cy.get('.tag-list-heading').find('.tag-item a').eq(5).click()
-        cy.url().should('include', 'https://www.sony.com/en/SonyInfo/design/stories/#perspectives')
-
-    });
+describe('Samsung', () => {
+    it('should be able to select online exclusive colors and see a larger preview of the phone in that color.', () => {
+        cy.visit('www.samsung.com');
+        cy.scrollTo('bottom')
+        cy.get(':nth-child(2) > .footer-category > .footer-category__list-wrap > .footer-category__list > :nth-child(1) > .footer-category__link').click()
+        cy.wait(2)
+        cy.url('https://www.samsung.com/latin/smartphones/?product1=sm-f916bznqgto&product2=&product3=sm-a525mzkgtpa')
+        cy.wait(2)
+        cy.get(':nth-child(1) > .nv14-visual-lnb__featured-item-link > .image > .image__main').click()
+        cy.wait(1)
+        cy.get('[data-productidx="0"] > .pd03-product-card > .pd03-product-card__item > .pd03-product-card__product-content > .pd03-product-card__product-content-primary > .pd03-product-card__option-selector > .option-selector-v2 > .option-selector-v2__wrap--color-chip > .option-selector-v2__swiper > .option-selector-v2__swiper-container > .option-selector-v2__swiper-wrapper > :nth-child(3) > .option-selector-v2__color > .option-selector-v2__color-code').click()
+        cy.wait(1)
+        cy.get('[data-productidx="0"] > .pd03-product-card > .pd03-product-card__item > .pd03-product-card__product-content > .pd03-product-card__product-content-primary > .pd03-product-card__option-selector > .option-selector-v2 > .option-selector-v2__color-name > .option-selector-v2__color-name-text > .option-selector-v2__color-name-text-in').contains('Graphite')
+    });   
 });
